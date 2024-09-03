@@ -267,7 +267,7 @@ jobs:
             ruby -e 'puts Gem.platforms.last.to_s' | tee gem_platform
             echo "::set-output name=GEM_PLATFORM::$(cat gem_platform)"
       - name: Download a single artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: gem-${{ needs.build-ruby.outputs.GEM_VERSION }}-ruby
           path: pkg
@@ -302,7 +302,7 @@ jobs:
             ruby -e 'puts Gem.platforms.last.to_s.gsub(/-darwin-?\d+/, "-darwin")' | tee gem_platform
             echo "::set-output name=GEM_PLATFORM::$(cat gem_platform)"
       - name: Download a single artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: gem-${{ needs.build-darwin.outputs.GEM_VERSION }}-${{ steps.set-metadata.outputs.GEM_PLATFORM }}
           path: pkg
@@ -385,7 +385,7 @@ jobs:
             docker exec -w "${PWD}" ${{ steps.container.outputs.id }} ruby -e 'puts Gem.platforms.last.to_s' | tee gem_platform
             echo "::set-output name=GEM_PLATFORM::$(cat gem_platform)"
       - name: Download a single artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4.1.7
         with:
           name: gem-${{ needs.build-linux.outputs.GEM_VERSION }}-${{ steps.set-metadata.outputs.GEM_PLATFORM }}
           path: pkg
